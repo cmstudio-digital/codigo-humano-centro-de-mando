@@ -20,9 +20,9 @@
     </div>
 
     <script>
-        // --- AQUÍ ESTÁ LA CONEXIÓN ---
+        // Configuración de Supabase
         const SUPABASE_URL = 'https://rxerpjpsuvjybjccyzmn.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_x45XEwk8SGr1P7XU1OBW5g_kiUEN6gz'; // <--- PEGA TU LLAVE ANON AQUÍ
+        const SUPABASE_KEY = 'sb_publishable_x45XEwk8SGr1P7XU1OBW5g_kiUEN6gz';
         
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -30,12 +30,21 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            const { data, error } = await supabase.auth.signUp({ email, password });
+            try {
+                const { data, error } = await supabase.auth.signUp({ 
+                    email: email, 
+                    password: password 
+                });
 
-            if (error) {
-                alert("Error: " + error.message);
-            } else {
-                alert("¡Éxito! Registro enviado. Revisa tu correo.");
+                if (error) {
+                    alert("Error Supabase: " + error.message);
+                } else {
+                    alert("¡Éxito! Registro enviado. Revisa tu correo.");
+                    // Redirección al Mundo 2
+                    window.location.href = "mundo2.html"; 
+                }
+            } catch (err) {
+                alert("Error crítico: " + err.message);
             }
         };
     </script>
