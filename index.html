@@ -20,25 +20,26 @@
     </div>
 
     <script>
+        // Configuración única
         const SUPABASE_URL = 'https://rxerpjpsuvjybjccyzmn.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_x45XEwk8SGr1P7XU1OBW5g_kiUEN6gz';
         
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        document.getElementById('btn').onclick = async () => {
+        // Evento único y limpio
+        document.getElementById('btn').addEventListener('click', async () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            const { data, error } = await supabase.auth.signUp({ email, password });
-
-            if (error) {
-                alert("ERROR DE SUPABASE: " + error.message);
-                console.error(error);
-            } else {
+            try {
+                const { data, error } = await supabase.auth.signUp({ email, password });
+                if (error) throw error;
                 alert("¡Éxito! Registro enviado. Revisa tu correo.");
                 window.location.href = "mundo2.html";
+            } catch (err) {
+                alert("Error: " + err.message);
             }
-        };
+        });
     </script>
 </body>
 </html>
