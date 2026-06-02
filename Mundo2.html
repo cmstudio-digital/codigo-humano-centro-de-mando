@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Control | Centro de Mando</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        .dashboard { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
+        .stat-card { background: #007bff; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .btn-logout { background-color: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <h1>Bienvenido al Centro de Mando</h1>
+        <p>Has accedido correctamente a tu panel privado.</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Estado</h3>
+                <p>Activo</p>
+            </div>
+            <div class="stat-card">
+                <h3>Conexión</h3>
+                <p>Establecida</p>
+            </div>
+        </div>
+
+        <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
+    </div>
+
+    <script>
+        function logout() {
+            // Lógica para cerrar sesión
+            alert("Sesión cerrada. Redirigiendo...");
+            window.location.href = "mundo1.html";
+        }
+    </script>
+</body>
+</html>

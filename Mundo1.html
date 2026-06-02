@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Centro de Mando</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Centro de Mando</h1>
+        <input type="email" id="email" placeholder="Correo">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button id="btn">Registrarse</button>
+    </div>
+
+    <script>
+        // --- AQUÍ ESTÁ LA CONEXIÓN ---
+        const SUPABASE_URL = 'https://rxerpjpsuvjybjccyzmn.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_x45XEwk8SGr1P7XU1OBW5g_kiUEN6gz'; // <--- PEGA TU LLAVE ANON AQUÍ
+        
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        document.getElementById('btn').onclick = async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const { data, error } = await supabase.auth.signUp({ email, password });
+
+            if (error) {
+                alert("Error: " + error.message);
+            } else {
+                alert("¡Éxito! Registro enviado. Revisa tu correo.");
+            }
+        };
+    </script>
+</body>
+</html>
