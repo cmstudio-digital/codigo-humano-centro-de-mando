@@ -7,8 +7,8 @@
     <style>
         body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; }
+        button { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -20,7 +20,6 @@
     </div>
 
     <script>
-        // Configuración de Supabase
         const SUPABASE_URL = 'https://rxerpjpsuvjybjccyzmn.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_x45XEwk8SGr1P7XU1OBW5g_kiUEN6gz';
         
@@ -30,21 +29,14 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            try {
-                const { data, error } = await supabase.auth.signUp({ 
-                    email: email, 
-                    password: password 
-                });
+            const { data, error } = await supabase.auth.signUp({ email, password });
 
-                if (error) {
-                    alert("Error Supabase: " + error.message);
-                } else {
-                    alert("¡Éxito! Registro enviado. Revisa tu correo.");
-                    // Redirección al Mundo 2
-                    window.location.href = "mundo2.html"; 
-                }
-            } catch (err) {
-                alert("Error crítico: " + err.message);
+            if (error) {
+                alert("ERROR DE SUPABASE: " + error.message);
+                console.error(error);
+            } else {
+                alert("¡Éxito! Registro enviado. Revisa tu correo.");
+                window.location.href = "mundo2.html";
             }
         };
     </script>
